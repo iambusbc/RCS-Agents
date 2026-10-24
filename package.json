@@ -1,0 +1,27 @@
+{
+  "name": "rcs-agents",
+  "version": "0.1.0",
+  "private": true,
+  "description": "AI software company: role-based Claude agents collaborating through Git, watched live in a 3D office",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "start": "tsx src/index.ts",
+    "demo": "tsx src/index.ts --mock",
+    "typecheck": "tsc --noEmit",
+    "test": "tsx --test tests/*.test.ts"
+  },
+  "dependencies": {
+    "@anthropic-ai/claude-agent-sdk": "^0.3.310",
+    "three": "^0.170.0",
+    "ws": "^8.18.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "@types/ws": "^8.5.13",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2"
+  }
+}
