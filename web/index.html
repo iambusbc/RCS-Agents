@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>RCS Agents Office</title>
+  <link rel="stylesheet" href="style.css" />
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "/vendor/three/build/three.module.js",
+        "three/addons/": "/vendor/three/examples/jsm/"
+      }
+    }
+  </script>
+</head>
+<body>
+  <div id="scene">
+    <figure id="map-box">
+      <figcaption>แผนที่ออฟฟิศ · คลิกเพื่อเลือก agent</figcaption>
+      <canvas id="minimap"></canvas>
+    </figure>
+  </div>
+
+  <aside id="panel">
+    <header>
+      <h1>RCS Agents</h1>
+      <span id="conn" class="pill">connecting…</span>
+    </header>
+
+    <form id="task-form">
+      <input id="task-input" placeholder="สั่งงาน เช่น: เพิ่ม API สมัครสมาชิก" autocomplete="off" />
+      <button type="submit">ส่งงาน</button>
+    </form>
+
+    <section>
+      <h2>Token</h2>
+      <div id="meter" class="meter">
+        <div><b id="m-in">0</b><small>input</small></div>
+        <div><b id="m-out">0</b><small>output</small></div>
+        <div><b id="m-cache">0%</b><small>cache hit</small></div>
+        <div><b id="m-cost">$0.00</b><small>cost</small></div>
+      </div>
+    </section>
+
+    <section id="agent-card" hidden>
+      <h2 id="a-title"></h2>
+      <dl>
+        <dt>Model</dt><dd id="a-model"></dd>
+        <dt>State</dt><dd id="a-state"></dd>
+        <dt>Last action</dt><dd id="a-last"></dd>
+        <dt>Tokens</dt><dd id="a-tokens"></dd>
+      </dl>
+    </section>
+
+    <section>
+      <h2>Tasks</h2>
+      <div id="kanban" class="kanban"></div>
+    </section>
+
+    <section class="grow">
+      <h2>Live log</h2>
+      <ol id="log"></ol>
+    </section>
+  </aside>
+
+  <script type="module" src="office.js"></script>
+</body>
+</html>
