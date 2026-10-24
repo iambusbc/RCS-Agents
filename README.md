@@ -35,6 +35,32 @@ TEST_CMD="npm test" npm start -- --repo ../my-project --task "เพิ่ม AP
 
 ทุกขั้นตอนจะส่ง event เข้า event bus แล้ว WebSocket ส่งต่อไปที่ออฟฟิศ 3D หน้า UI แค่ฟัง event อย่างเดียว ไม่เรียก Claude จึงเปิดดูได้ตลอดเวลาโดยไม่เสีย token
 
+## แผนที่ออฟฟิศ
+
+แผนที่กำหนดไว้ที่ `web/map.js` ไฟล์เดียว ทั้งฉาก 3D มินิแมป และเทสต์อ่านจากไฟล์นี้
+
+| ห้อง | ใครนั่ง |
+| --- | --- |
+| ห้อง CEO | Orchestrator |
+| ห้องประชุม | โต๊ะประชุม + กระดาน kanban (ที่ฉลองตอน merge) |
+| ห้องรีวิวโค้ด | Code Reviewer |
+| ห้องเซิร์ฟเวอร์ | DevOps + ตู้ server |
+| Product & Docs | PM, Architect, Docs Writer |
+| Dev Floor | Frontend Dev, Backend Dev |
+| QA Lab | QA / Tester |
+| Pantry | มุมกาแฟ ที่ agent ว่างงานแวะไปพัก |
+
+Agent เดินตามทางเดินและประตูจริง (หาเส้นทางด้วย A* หลบกำแพงและโต๊ะ) และเดินตามงาน:
+
+- สร้าง task → CEO ถือ task card เดินไปส่งที่โต๊ะ Dev
+- เปิด PR → Dev ถือเอกสารเดินไปห้องรีวิว
+- รีวิวขอแก้ → Reviewer เดินมาอธิบายที่โต๊ะ Dev
+- รันเทสต์ → QA เดินมาที่โต๊ะ Dev
+- Merge → CEO, Dev, Reviewer ไปเจอกันที่ห้องประชุม แล้วมีพลุ
+- ว่างงาน → แวะ Pantry หรือห้องประชุมเป็นระยะ ถ้ามีงานเข้าจะเดินกลับโต๊ะทันที
+
+มินิแมปมุมซ้ายบนแสดงทุกห้องและตำแหน่ง agent พร้อมเส้นประบอกทางที่กำลังเดิน คลิกที่จุดเพื่อเลือก agent และเลื่อนกล้องไปหา
+
 ## วิธีที่ใช้ประหยัด token
 
 | วิธี | อยู่ที่ไฟล์ |
@@ -58,7 +84,7 @@ TEST_CMD="npm test" npm start -- --repo ../my-project --task "เพิ่ม AP
 | `MAX_ROUNDS` | `3` | จำนวนรอบแก้งานสูงสุด |
 | `TASK_BUDGET_USD` | `2` | งบประมาณโดยประมาณต่องาน |
 | `MODEL_OPUS` / `MODEL_SONNET` / `MODEL_HAIKU` | `claude-opus-5-5` / `claude-sonnet-5-5` / `claude-haiku-5-5` | เปลี่ยนโมเดลแต่ละระดับ |
-| `MOCK_DELAY_MS` | `700` | ความเร็วของโหมดจำลอง |
+| `MOCK_DELAY_MS` | `1500` | ความเร็วของโหมดจำลอง |
 
 ## โครงสร้างโปรเจกต์
 
@@ -74,7 +100,8 @@ src/
   agents/claude.ts   agent จริงผ่าน Claude Agent SDK
   agents/mock.ts     agent จำลอง ไม่ใช้ token
 web/                 ออฟฟิศ 3D (three.js) + kanban + มิเตอร์ token + live log
-tests/               เทสต์ทั้งขั้นตอนด้วย agent จำลอง
+  map.js             แผนที่ห้อง กำแพง ประตู โต๊ะ และระบบหาเส้นทาง
+tests/               เทสต์ทั้งขั้นตอนด้วย agent จำลอง + เทสต์ว่าทุกจุดในแผนที่เดินถึงกัน
 ```
 
 ## สิ่งที่จะทำต่อ

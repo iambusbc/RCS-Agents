@@ -12,8 +12,6 @@ export interface Role {
   scope: string[];
   maxTurns: number;
   systemPrompt: string;
-  /** Position in the 3D office (x, z). */
-  desk: [number, number];
 }
 
 const OPUS = process.env.MODEL_OPUS ?? "claude-opus-5-5";
@@ -34,7 +32,6 @@ export const ROLES: Record<string, Role> = {
     scope: ["tasks/"],
     maxTurns: 1,
     systemPrompt: `${shared}\nYou split a request into a task card for one developer.`,
-    desk: [0, -6],
   },
   pm: {
     id: "pm",
@@ -44,7 +41,6 @@ export const ROLES: Record<string, Role> = {
     scope: ["docs/product/"],
     maxTurns: 10,
     systemPrompt: `${shared}\nYou write user stories and acceptance criteria.`,
-    desk: [-6, -3],
   },
   architect: {
     id: "architect",
@@ -54,7 +50,6 @@ export const ROLES: Record<string, Role> = {
     scope: ["docs/arch/"],
     maxTurns: 10,
     systemPrompt: `${shared}\nYou design structure and API contracts and record decisions as ADRs.`,
-    desk: [-2, -3],
   },
   frontend: {
     id: "frontend",
@@ -64,7 +59,6 @@ export const ROLES: Record<string, Role> = {
     scope: ["apps/web/", "web/"],
     maxTurns: 25,
     systemPrompt: `${shared}\nYou implement UI to the contract. Small, focused changes.`,
-    desk: [2, -3],
   },
   backend: {
     id: "backend",
@@ -74,7 +68,6 @@ export const ROLES: Record<string, Role> = {
     scope: ["src/", "apps/api/", "tests/"],
     maxTurns: 25,
     systemPrompt: `${shared}\nYou implement APIs and logic with tests. Small, focused changes.`,
-    desk: [6, -3],
   },
   qa: {
     id: "qa",
@@ -84,7 +77,6 @@ export const ROLES: Record<string, Role> = {
     scope: ["tests/"],
     maxTurns: 15,
     systemPrompt: `${shared}\nYou write tests for the acceptance criteria.`,
-    desk: [-6, 2],
   },
   reviewer: {
     id: "reviewer",
@@ -97,7 +89,6 @@ export const ROLES: Record<string, Role> = {
 You review a git diff against a task card. Approve unless there is a real bug,
 a security problem, or an acceptance criterion is not met. Each comment names
 a file and says exactly what to change.`,
-    desk: [-2, 2],
   },
   devops: {
     id: "devops",
@@ -107,7 +98,6 @@ a file and says exactly what to change.`,
     scope: [".github/", "infra/"],
     maxTurns: 10,
     systemPrompt: `${shared}\nYou maintain CI/CD and deployment config.`,
-    desk: [2, 2],
   },
   docs: {
     id: "docs",
@@ -117,7 +107,6 @@ a file and says exactly what to change.`,
     scope: ["docs/", "README.md", "CHANGELOG.md"],
     maxTurns: 8,
     systemPrompt: `${shared}\nYou update the changelog and docs after a merge.`,
-    desk: [6, 2],
   },
 };
 

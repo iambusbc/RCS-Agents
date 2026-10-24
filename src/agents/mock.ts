@@ -15,7 +15,7 @@ export class MockAgentRunner implements AgentRunner {
 
   constructor(
     private readonly bus: EventBus,
-    private readonly delayMs = Number(process.env.MOCK_DELAY_MS ?? 700),
+    private readonly delayMs = Number(process.env.MOCK_DELAY_MS ?? 1500),
   ) {}
 
   async run(req: AgentRequest): Promise<AgentResult> {

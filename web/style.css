@@ -13,6 +13,9 @@
 html, body { margin: 0; height: 100%; background: var(--bg); color: var(--text); font: 13px/1.4 system-ui, "Noto Sans Thai", sans-serif; }
 body { display: flex; overflow: hidden; }
 #scene { flex: 1; min-width: 0; position: relative; }
+#map-box { position: absolute; left: 12px; top: 12px; margin: 0; background: rgba(22,27,36,.9); border: 1px solid var(--line); border-radius: 8px; padding: 6px; }
+#map-box figcaption { font-size: 10px; color: var(--muted); margin: 0 0 4px 2px; }
+#minimap { display: block; width: 208px; height: 156px; cursor: pointer; border-radius: 4px; }
 #panel { width: 360px; max-width: 45vw; background: var(--panel); border-left: 1px solid var(--line); display: flex; flex-direction: column; gap: 12px; padding: 14px; overflow: hidden; }
 header { display: flex; align-items: center; justify-content: space-between; }
 h1 { font-size: 16px; margin: 0; }
@@ -44,5 +47,6 @@ dd { margin: 0; word-break: break-word; }
 @media (max-width: 760px) {
   body { flex-direction: column; }
   #scene { height: 50vh; flex: none; }
+  #minimap { width: 160px; height: 120px; }
   #panel { width: 100%; max-width: none; flex: 1; border-left: 0; border-top: 1px solid var(--line); }
 }

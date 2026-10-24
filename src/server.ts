@@ -42,7 +42,7 @@ export function startServer(bus: EventBus, submit: (request: string) => void, po
         return json(
           res,
           200,
-          Object.values(ROLES).map(({ id, title, model, desk }) => ({ id, title, model, desk })),
+          Object.values(ROLES).map(({ id, title, model }) => ({ id, title, model })),
         );
       }
       if (url.pathname === "/api/tasks" && req.method === "POST") {
